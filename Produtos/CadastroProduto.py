@@ -13,6 +13,6 @@ def Produto():
     #Cria um objeto com as espeficicações do produto
     NovoProduto = Product(nome,valor,quantidade,categoria,fabricante,especificacao)
     #Envia para o leitor de JSON para guardar os dados
-    DataProduct(NovoProduto.nome,NovoProduto.valor,
+    DataProduct("Cadastro",NovoProduto.nome,NovoProduto.valor,
                 NovoProduto.quantidade,NovoProduto.categoria,
                 NovoProduto.fabricante,NovoProduto.especificacao)
