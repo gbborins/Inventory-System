@@ -1,0 +1,11 @@
+[
+    {
+        "Nome":"Carne",
+        "Valor":32.5,
+        "Quantidade":20,
+        "Categoria":"frios",
+        "Fabricante":"Carlos_carnes",
+        "Especificacao":"picanha",
+        "Fornecedor_id":10101
+    }
+]
