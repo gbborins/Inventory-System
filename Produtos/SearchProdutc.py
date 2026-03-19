@@ -6,7 +6,7 @@ def buscar_produto():
     #Se o produto existir mostra os dados
     if produto:
         print(f"\nO produto {nome} tem os seguintes dado: ")
-        print(f"""R${produto[0]} | Qtd: {produto[1]} | Cate: {produto[2]} 
+        print(f"""\nR${produto[0]} | Qtd: {produto[1]} | Cate: {produto[2]} 
               | Fabri: {produto[3]} | Espe: {produto[4]} | Forn_id {produto[5]}""")
     else:
-        print(f"Não foi possível achar o produto com nome {nome}")
+        print(f"\nNão foi possível achar o produto com nome {nome}")

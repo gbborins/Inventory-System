@@ -6,7 +6,7 @@ def buscar_fornecedor():
     #Se a empresa existir mostra os dados
     if produto:
         print(f"\nA empresa {nome_empresa} tem os seguintes dado: ")
-        print(f"""CNPJ: {produto[0]} | Telefone: {produto[1]} | Email: {produto[2]} 
+        print(f"""\nCNPJ: {produto[0]} | Telefone: {produto[1]} | Email: {produto[2]} 
               | Endereco: {produto[3]}""")
     else:
-        print(f"Não foi possível achar a empresa com nome {nome_empresa}")
+        print(f"\nNão foi possível achar a empresa com nome {nome_empresa}")

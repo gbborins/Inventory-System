@@ -1,9 +1,12 @@
-from Verify import verification
-from Estoque import Storage
-def Estoque():
-    nome = input("Qual o nome do produto? ")
-    #Verifica o valor e quantidade
-    valor = verification.validation(float,"Qual o valor do produto? ")
-    quantidade = verification.validation(int,"Qual a quantidade do produto? ")
-    #Envia os valores para o leitora de excel para guardar os dados
-    Storage.stock(nome,valor,quantidade)
+from Estoque.NewStorage import Storage
+from Estoque.ListaStorage import DataStorage
+def Fornecedores():
+    produto_id = input("Qual o ID do produto? ")
+    #Verifica o CNPJ
+    quantidade = input("Qual a quantidade do produto? ")
+    origem = input("Qual a origem do produto? ")
+    motivo = input("Qual o motivo do produto? ")
+    #Cria um objeto com as espeficicações do fornecedor
+    NovoEstoque = Storage(produto_id,quantidade,origem,motivo)
+    DataStorage("Cadastro",NovoEstoque.produto_id,NovoEstoque.quantidade,
+                 NovoEstoque.origem,NovoEstoque.motivo)

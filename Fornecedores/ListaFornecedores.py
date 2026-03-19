@@ -1,11 +1,11 @@
 #Fornecedores listados
 import pandas as pd
-import os
+from pathlib import Path
 def DataProvider(funcao,nome_empresa = None,cnpj = None,telefone = None,
                 email = None,endereco = None):
-    path = r"D:\Programacao\Python\Proj2\Fornecedores\lista_fornecedores.json"
+    path = Path(input("Digite o caminho do arquivo JSON: "))
     #verifica se o caminho já existe
-    if os.path.exists(path) and os.path.getsize(path) > 0:
+    if Path.exists(path) and Path.getsize(path) > 0:
         #Lê um arquivo json
         df = pd.read_json(path)
         if df.empty:
@@ -30,35 +30,35 @@ def DataProvider(funcao,nome_empresa = None,cnpj = None,telefone = None,
         if nome_empresa not in df["Nome_Empresa"].values:
             #Adiciona uma nova linha com os valores
             df.loc[len(df)] = [nome_empresa,cnpj,telefone,email,endereco]
-            print(f"Produto {nome_empresa} cadastrado com sucesso")
+            print(f"\nProduto {nome_empresa} cadastrado com sucesso")
         else:
             linha = df[df["Nome_Empresa"] == nome_empresa].index[0]
             #Substitui o novo cnpj
             if df.loc[linha,"CNPJ"] != cnpj:
                 df.loc[linha,"CNPJ"] = cnpj
-                print("O cnpj mudou")
+                print("\nO cnpj mudou")
             if df.loc[linha,"Telefone"] != telefone:
                 df.loc[linha,"Telefone"] = telefone
-                print("O telefone mudou")
+                print("\nO telefone mudou")
             if df.loc[linha,"Email"] != email:
                 df.loc[linha,"Email"] = email
-                print("O email mudou")
+                print("\nO email mudou")
             if df.loc[linha,"Endereco"] != endereco:
                 df.loc[linha,"Endereco"] = endereco
-                print("O endereco mudou")
+                print("\nO endereco mudou")
     elif funcao == "Buscar":
         #Verifica se o nome_empresa está em alguma linha
         if nome_empresa in df["Nome_Empresa"].values:
             #Obtém a linha em que o nome_empresa é encontrado
             linha = df[df["Nome_Empresa"] == nome_empresa].index[0]
             return [df.loc[linha,"CNPJ"],df.loc[linha,"Telefone"],
-                    df.loc[linha,"Email"],df.loc[linha,"endereco"]]
+                    df.loc[linha,"Email"],df.loc[linha,"Endereco"]]
         else:
             return False
     elif funcao == "Lista":
         for _,linha in df.iterrows():
-            print(f"""{linha["Nome_Empresa"]} | R${linha["cnpj"]} | Qtd: {linha["Telefone"]} 
-                  | Cate: {linha["Email"]} | Fabri: {linha["endereco"]}""")
+            print(f"""\n{linha["Nome_Empresa"]} | R${linha["CNPJ"]} | Qtd: {linha["Telefone"]} 
+                  | Cate: {linha["Email"]} | Fabri: {linha["Endereco"]}""")
     elif funcao == "Remover":
         #Verifica se o nome_empresa está em alguma linha
         if nome_empresa in df["Nome_Empresa"].values:

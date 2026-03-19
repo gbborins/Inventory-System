@@ -10,7 +10,7 @@ def remove_produto():
         certeza = input(f"\n Você tem certeza que quer excluir o produto: {nome}, (y/n): ")
         if certeza == "y".lower():
                 df = df[df["Nome"] != nome]
-                print(f"O produto {nome} foi removido")
+                print(f"\nO produto {nome} foi removido")
     else:
-        print(f"Não foi possível achar o produto com nome {nome}")
+        print(f"\nNão foi possível achar o produto com nome {nome}")
     df.to_json(caminho,orient="records", indent=4)

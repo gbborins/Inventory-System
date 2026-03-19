@@ -10,7 +10,7 @@ def remove_provider():
         certeza = input(f"\n Você tem certeza que quer excluir a empresa: {nome_empresa}, (y/n): ")
         if certeza == "y".lower():
                 df = df[df["Nome_Empresa"] != nome_empresa]
-                print(f"A empresa {nome_empresa} foi removida")
+                print(f"\nA empresa {nome_empresa} foi removida")
     else:
-        print(f"Não foi possível achar a empresa com nome {nome_empresa}")
+        print(f"\nNão foi possível achar a empresa com nome {nome_empresa}")
     df.to_json(caminho,orient="records", indent=4)
