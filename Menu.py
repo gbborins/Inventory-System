@@ -1,5 +1,5 @@
 from Produtos import CadastroProduto, SearchProdutc, ListProduct, RemoveProduct
-from Estoque import CadastroEstoque
+from Estoque import CadastroEstoque, SearchEstoque, ListaStorage, RemoveStorage
 from Verify import verification
 from Fornecedores import CadastroFornecedores, SearchFornecedor, ListaFornecedores, RemoveProvider
 def main():
@@ -51,6 +51,19 @@ def main():
             elif opcao == 4:
                 RemoveProvider.remove_provider()
         elif escolha == 3:
-            CadastroEstoque.Estoque()
+            print("""
+            1 - Novo Estoque
+            2 - Procurar Estoque
+            3 - Lista dos Estoques
+            4 - Remover Estoque""")
+            opcao = verification.validation(int,"Escolha uma opção: ",False)
+            if opcao == 1:
+                CadastroEstoque.Estoques()
+            elif opcao == 2:
+                SearchEstoque.BuscarEstoque()
+            elif opcao == 3:
+                ListaStorage.DataStorage("Lista")
+            elif opcao == 4:
+                RemoveStorage.RemoveStorage()
 if __name__ == "__main__":
     main()

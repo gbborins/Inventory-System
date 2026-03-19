@@ -1,5 +1,5 @@
 import pandas as pd
-def stock(nome,valor, quantidade):
+def Estoque(nome,valor, quantidade):
     #Lê um arquivo excel
     df = pd.read_excel(r"D:\Programacao\Python\Proj2\Estoque\Items.xlsx")
         #Verifica se já está no estoque

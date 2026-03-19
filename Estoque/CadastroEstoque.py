@@ -1,6 +1,6 @@
 from Estoque.NewStorage import Storage
 from Estoque.ListaStorage import DataStorage
-def Fornecedores():
+def Estoques():
     produto_id = input("Qual o ID do produto? ")
     #Verifica o CNPJ
     quantidade = input("Qual a quantidade do produto? ")
