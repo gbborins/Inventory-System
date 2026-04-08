@@ -3,25 +3,26 @@ import pandas as pd
 from pathlib import Path
 def DataStorage(funcao,produto_id = None,quantidade = None,origem = None,
                 motivo = None):
-    path = Path(input("Digite o caminho do arquivo JSON: "))
+    path = Path(input("Digite o nome do arquivo JSON: "))
+    json_file = Path(__file__).parent / path
     #verifica se o caminho já existe
-    if Path.exists(path) and Path.getsize(path) > 0:
-        #Lê um arquivo json
-        df = pd.read_json(path)
-        if df.empty:
-            df = pd.DataFrame(columns=[
-            "Product_ID",
-            "Quantidade",
-            "Origem",
-            "Motivo"
-        ])
-    else:
+    if not Path.exists(json_file):
         #Se não existir cria um novo
         df = pd.DataFrame(columns=[
         "Product_ID",
         "Quantidade",
         "Origem",
         "Motivo"
+        ])
+    elif Path(json_file).stat().st_size > 0:
+        #Lê um arquivo json
+        df = pd.read_json(json_file)
+        if df.empty:
+            df = pd.DataFrame(columns=[
+            "Product_ID",
+            "Quantidade",
+            "Origem",
+            "Motivo"
         ])
     if funcao == "Cadastro": 
         #Escreve no arquivo json
@@ -52,12 +53,12 @@ def DataStorage(funcao,produto_id = None,quantidade = None,origem = None,
             return False
     elif funcao == "Lista":
         for _,linha in df.iterrows():
-            print(f"""\n{linha["Product_ID"]} | Qtd: {linha["Quantidade"]} | Origem: {linha["Origem"]} 
+            print(f"""\nID: {linha["Product_ID"]} | Qtd: {linha["Quantidade"]} | Origem: {linha["Origem"]} 
                   | Motivo: {linha["Motivo"]}""")
     elif funcao == "Remover":
         #Verifica se o produto_id está em alguma linha
         if produto_id in df["Product_ID"].values:
             #Retorna a linha e o caminho
-            return path
+            return json_file
     #Salva o arquivo para não perder as modificações
-    df.to_json(path, orient="records", indent=4)
+    df.to_json(json_file, orient="records", indent=4)

@@ -3,22 +3,10 @@ import pandas as pd
 from pathlib import Path
 def DataProduct(funcao,nome = None,valor = None, quantidade = None,
                 categoria = None,fabricante = None,especificacao = None,fornecedor_id = None):
-    path = Path(input("Digite o caminho do arquivo JSON: "))
+    path = Path(input("Digite o nome do arquivo JSON: "))
+    json_file = Path(__file__).parent / path
     #verifica se o caminho já existe
-    if Path.exists(path) and Path.getsize(path) > 0:
-        #Lê um arquivo json
-        df = pd.read_json(path)
-        if df.empty:
-            df = pd.DataFrame(columns=[
-            "Nome",
-            "Valor",
-            "Quantidade",
-            "Categoria",
-            "Fabricante",
-            "Especificacao",
-            "Fornecedor_id"
-        ])
-    else:
+    if not Path.exists(json_file):
         #Se não existir cria um novo
         df = pd.DataFrame(columns=[
             "Nome",
@@ -29,6 +17,19 @@ def DataProduct(funcao,nome = None,valor = None, quantidade = None,
             "Especificacao",
             "Fornecedor_id"
         ])
+    elif Path(json_file).stat().st_size > 0:
+        #Lê um arquivo json
+        df = pd.read_json(json_file)
+        if df.empty:
+            df = pd.DataFrame(columns=[
+            "Nome",
+            "Valor",
+            "Quantidade",
+            "Categoria",
+            "Fabricante",
+            "Especificacao",
+            "Fornecedor_id"
+        ])    
     if funcao == "Cadastro": 
         #Escreve no arquivo json
         if nome not in df["Nome"].values:
@@ -75,6 +76,6 @@ def DataProduct(funcao,nome = None,valor = None, quantidade = None,
         #Verifica se o nome está em alguma linha
         if nome in df["Nome"].values:
             #Retorna a linha e o caminho
-            return path
+            return json_file
     #Salva o arquivo para não perder as modificações
-    df.to_json(path, orient="records", indent=4)
+    df.to_json(json_file, orient="records", indent=4)

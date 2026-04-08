@@ -3,20 +3,10 @@ import pandas as pd
 from pathlib import Path
 def DataProvider(funcao,nome_empresa = None,cnpj = None,telefone = None,
                 email = None,endereco = None):
-    path = Path(input("Digite o caminho do arquivo JSON: "))
+    path = Path(input("Digite o nome do arquivo JSON: "))
+    json_file = Path(__file__).parent / path
     #verifica se o caminho já existe
-    if Path.exists(path) and Path.getsize(path) > 0:
-        #Lê um arquivo json
-        df = pd.read_json(path)
-        if df.empty:
-            df = pd.DataFrame(columns=[
-            "Nome_Empresa",
-            "CNPJ",
-            "Telefone",
-            "Email",
-            "Endereco"
-        ])
-    else:
+    if not Path.exists(json_file):
         #Se não existir cria um novo
         df = pd.DataFrame(columns=[
         "Nome_Empresa",
@@ -25,6 +15,17 @@ def DataProvider(funcao,nome_empresa = None,cnpj = None,telefone = None,
         "Email",
         "Endereco"
         ])
+    elif Path(json_file).stat().st_size > 0:
+        #Lê um arquivo json
+        df = pd.read_json(json_file)
+        if df.empty:
+            df = pd.DataFrame(columns=[
+            "Nome_Empresa",
+            "CNPJ",
+            "Telefone",
+            "Email",
+            "Endereco"
+        ])   
     if funcao == "Cadastro": 
         #Escreve no arquivo json
         if nome_empresa not in df["Nome_Empresa"].values:
@@ -57,12 +58,12 @@ def DataProvider(funcao,nome_empresa = None,cnpj = None,telefone = None,
             return False
     elif funcao == "Lista":
         for _,linha in df.iterrows():
-            print(f"""\n{linha["Nome_Empresa"]} | R${linha["CNPJ"]} | Qtd: {linha["Telefone"]} 
-                  | Cate: {linha["Email"]} | Fabri: {linha["Endereco"]}""")
+            print(f"""\nNome: {linha["Nome_Empresa"]} | CNPJ: {linha["CNPJ"]} | Telefone: {linha["Telefone"]} 
+                  | Email: {linha["Email"]} | Endereço: {linha["Endereco"]}""")
     elif funcao == "Remover":
         #Verifica se o nome_empresa está em alguma linha
         if nome_empresa in df["Nome_Empresa"].values:
             #Retorna a linha e o caminho
-            return path
+            return json_file
     #Salva o arquivo para não perder as modificações
-    df.to_json(path, orient="records", indent=4)
+    df.to_json(json_file, orient="records", indent=4)
