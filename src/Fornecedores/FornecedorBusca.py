@@ -1,12 +1,12 @@
 from Fornecedores.FornecedorLista import DataProvider
-def buscar_fornecedor():
-    nome_empresa = input("Qual o nome da empresa? ")
-    #Envia o nome da empresa para a lista
-    produto = DataProvider("Buscar",nome_empresa)
-    #Se a empresa existir mostra os dados
-    if produto:
-        print(f"\nA empresa {nome_empresa} tem os seguintes dado: ")
-        print(f"""\nCNPJ: {produto[0]} | Telefone: {produto[1]} | Email: {produto[2]} 
-              | Endereco: {produto[3]}""")
+def BuscarFornecedor():
+    fornecedor_id = input("Qual o ID do fornecedor? ")
+    #Envia o ID do fornecedor para a lista
+    fornecedor = DataProvider("Buscar",fornecedor_id = fornecedor_id)
+    #Se o fornecedor existir mostra os dados
+    if fornecedor:
+        print(f"\nA empresa {fornecedor_id} tem os seguintes dado: ")
+        print(f"""\nNomeEmpresa: {fornecedor[0]} CNPJ: {fornecedor[1]} | Email: {fornecedor[2]} 
+              | Telefone: {fornecedor[3]} | Endereco: {fornecedor[4]}""")
     else:
-        print(f"\nNão foi possível achar a empresa com nome {nome_empresa}")
+        print(f"\nNão foi possível achar o fornecedor com ID {fornecedor_id}")

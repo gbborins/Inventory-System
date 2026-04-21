@@ -1,4 +1,4 @@
-from Clientes import ClienteBusca, ClienteCadastro, ClienteLista, ClienteRemove
+from Clientes import ClienteBusca, ClienteCadastro, ClienteLista, ClienteRemove, ClienteExportar_csv
 from Estoque import EstoqueBusca, EstoqueCadastro, EstoqueLista, EstoqueRemove
 from Fornecedores import FornecedorBusca, FornecedorCadastro, FornecedorLista, FornecedorRemove
 from Produtos import ProdutoBusca, ProdutoCadastro, ProdutoLista, ProdutoRemove
@@ -6,7 +6,7 @@ from Verify.verification import validation
 def main():
     print("""
     1: Produtos
-    2: Fornecedors
+    2: Fornecedores
     3: Estoque
     4: Clientes
     5: Compras
@@ -48,11 +48,11 @@ def main():
             if opcao == 1:
                 FornecedorCadastro.Fornecedores()
             elif opcao == 2:
-                FornecedorBusca.buscar_fornecedor()
+                FornecedorBusca.BuscarFornecedor()
             elif opcao == 3:
                 FornecedorLista.DataProvider("Lista")
             elif opcao == 4:
-                FornecedorRemove.remove_provider()
+                FornecedorRemove.RemoveProvider()
         elif escolha == 3:
             print("""
             1 - Novo Estoque
@@ -73,7 +73,8 @@ def main():
             1 - Novo Cliente
             2 - Procurar Cliente
             3 - Lista de clientes
-            4 - Remover Cliente""")
+            4 - Remover Cliente
+            5 - Criar Relatório Cliente""")
             opcao = validation(int,"Escolha uma opção: ",False)
             if opcao == 1:
                 ClienteCadastro.Clientes()
@@ -83,6 +84,8 @@ def main():
                 ClienteLista.DataClient("Lista")
             elif opcao == 4:
                 ClienteRemove.RemoveClient()
+            elif opcao == 5:
+                ClienteExportar_csv.Exportar_Cliente()
         print("""
     1: Produtos
     2: Fornecedors

@@ -4,11 +4,11 @@ def Fornecedores():
     nome_empresa = input("Qual o nome da empresa do fornecedor? ")
     #Verifica o CNPJ
     cnpj = input("Qual o CNPJ da empresa? ")
-    telefone = input("Qual o telefone? ")
     email = input("Qual o email? ")
+    telefone = input("Qual o telefone? ")
     endereco = input("Qual o endereço? ")
     #Cria um objeto com as espeficicações do fornecedor
-    NovoFornecedor = Provider(nome_empresa,cnpj,telefone,email,endereco)
-    DataProvider("Cadastro",NovoFornecedor.nome_empresa,NovoFornecedor.cnpj,
-                 NovoFornecedor.telefone,NovoFornecedor.email,
+    NovoFornecedor = Provider(nome=nome_empresa,cnpj=cnpj,email=email,telefone=telefone,endereco=endereco)
+    DataProvider("Cadastro",NovoFornecedor.nome,NovoFornecedor.cnpj,
+                 NovoFornecedor.email,NovoFornecedor.telefone,
                  NovoFornecedor.endereco)

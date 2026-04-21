@@ -1,7 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 class Client(BaseModel):
-    #Cria um objeto novo com essas especificações
     nome: Optional[str] = None
     Cpf: Optional[str] = None
     email: Optional[EmailStr] = None
